@@ -29,15 +29,9 @@ class Atleta{
         //método para as notas obtidas
         this.atletas.forEach(atleta => {
             let notasOrdenadas = [...atleta.notas].sort((a, b) => a - b);
-            console.log(`Atleta: ${atleta.nome} - Notas Obtidas: ${notasOrdenadas}`);
+            console.log(`Atleta ${atleta.nome}`);
+            console.log(`Notas Obtidas: ${notasOrdenadas}`);
         });
-    }
-
-    somaDasNotas(){
-        //método para somar as notas e depois ser chamado no método de média
-        this.atletas.forEach(atleta => {
-            let soma = atleta.notas.reduce((total, nota) => total + nota, 0);
-        })
     }
 
     mediaValida(){
