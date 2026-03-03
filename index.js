@@ -27,33 +27,31 @@ class Atleta{
 
     notasObtidas(){
         //método para as notas obtidas
-        let notas = notas.sort();
-        //ordenamento das matrizes de notas
-        for(let i = 0; i < this.atletas.length; i++){
-            //laço de repetição para exibir o nome do atleta e suas notas
-            console.log(`Atleta: ${this.atletas[i].nome} - Notas Obtidas: ${this.atletas[i].notas}`);
-            //concatenação do nome do atleta e suas notas obtidas
-        }
+        this.atletas.forEach(atleta => {
+            let notasOrdenadas = [...atleta.notas].sort((a, b) => a - b);
+            console.log(`Atleta: ${atleta.nome} - Notas Obtidas: ${notasOrdenadas}`);
+        });
     }
 
     somaDasNotas(){
         //método para somar as notas e depois ser chamado no método de média
-        let soma = 0;
-        for(let i = 0; i < this.atletas.length; i++){
-            let notas = this.atletas[i].notas;
-            this.notas.forEach(function(nota){
-                soma += nota;
-            })
-            console.log(soma);
-        }
+        this.atletas.forEach(atleta => {
+            let soma = atleta.notas.reduce((total, nota) => total + nota, 0);
+        })
     }
 
     mediaValida(){
         //método da média que chama a somaDasNotas() e então a divide pelo número de atletas
-        let soma = this.somaDasNotas();
-        let media = soma / this.atletas.length;
-        for(let i = 0; i < this.atletas.length; i++){
-            console.log(`Média Válida: ${media}`);
-        }
+        //remove maior e menor nota, calcula média das 3 restantes
+        this.atletas.forEach(atleta => {
+            let notasOrdenadas = [...atleta.notas].sort((a, b) => a - b);
+            let notasValidas = notasOrdenadas.slice(1, -1); //remove a primeira e a última
+            let media = notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length;
+            console.log(`Média Válida: ${media.toFixed(2)}`);
+        });
     }
 }
+
+let jernsVoleiAreia = new Atleta(atletas);
+jernsVoleiAreia.notasObtidas();
+jernsVoleiAreia.mediaValida();
