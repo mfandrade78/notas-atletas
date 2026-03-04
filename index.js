@@ -27,25 +27,38 @@ class Atleta{
 
     notasObtidas(){
         //método para as notas obtidas
-        this.atletas.forEach(atleta => {
-            let notasOrdenadas = [...atleta.notas].sort((a, b) => a - b);
-            console.log(`Atleta ${atleta.nome}`);
-            console.log(`Notas Obtidas: ${notasOrdenadas}`);
-        });
+        let objAtletas = this.atletas;
+        for (let i = 0; i < objAtletas.length; i++){
+            let notasComputadas = [...objAtletas[i].notas].sort((a, b) => a - b);
+            console.log(`Atleta: ${objAtletas[i].nome}`);
+            console.log(`Notas Obtidas: ${notasComputadas.join(",")}`);
+        }
     }
 
     mediaValida(){
-        //método da média que chama a somaDasNotas() e então a divide pelo número de atletas
-        //remove maior e menor nota, calcula média das 3 restantes
+        //método da média que chama as notasComputadas em notasObtidas() e então a divide pelo número de notas válidas
+        //remove maior e menor nota
         this.atletas.forEach(atleta => {
-            let notasOrdenadas = [...atleta.notas].sort((a, b) => a - b);
-            let notasValidas = notasOrdenadas.slice(1, -1); //remove a primeira e a última
-            let media = notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length;
-            console.log(`Média Válida: ${media.toFixed(2)}`);
+            let notasComputadas = [...atleta.notas].sort((a, b) => a - b);
+            let notasObtidas = notasComputadas.slice(1, -1); //remove a primeira e a última
+            let media = notasObtidas.reduce((total, nota) => total + nota, 0) / notasObtidas.length;
+            //reduce para somar o total com a nota, depois ele divide pelo número de notas válidas
+            console.log(`Média Válida: ${media}`);
         });
+    }
+
+    infoCompleta(){
+        let objAtletas = this.atletas;
+        for(let i = 0; i < objAtletas.length; i++){
+            let notasComputadas = [...objAtletas[i].notas].sort((a, b) => a - b);
+            let notasObtidas = notasComputadas.slice(1, -2);
+            let media = notasObtidas.reduce((total, nota) => total + nota, 0) / notasObtidas.length;
+            console.log(`\nAtleta: ${objAtletas[i].nome}`);
+            console.log(`Notas Obtidas: ${notasObtidas.join(",")}`);
+            console.log(`Média Válida: ${media}`);
+        }
     }
 }
 
 let jernsVoleiAreia = new Atleta(atletas);
-jernsVoleiAreia.notasObtidas();
-jernsVoleiAreia.mediaValida();
+jernsVoleiAreia.infoCompleta();
