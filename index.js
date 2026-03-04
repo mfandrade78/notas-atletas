@@ -39,8 +39,6 @@ class Atleta{
         //método da média que chama as notasComputadas em notasObtidas() e então a divide pelo número de notas válidas
         //remove maior e menor nota
         this.atletas.forEach(atleta => {
-            let notasComputadas = [...atleta.notas].sort((a, b) => a - b);
-            let notasObtidas = notasComputadas.slice(1, -1); //remove a primeira e a última
             let media = notasObtidas.reduce((total, nota) => total + nota, 0) / notasObtidas.length;
             //reduce para somar o total com a nota, depois ele divide pelo número de notas válidas
             console.log(`Média Válida: ${media}`);
@@ -50,9 +48,6 @@ class Atleta{
     infoCompleta(){
         let objAtletas = this.atletas;
         for(let i = 0; i < objAtletas.length; i++){
-            let notasComputadas = [...objAtletas[i].notas].sort((a, b) => a - b);
-            let notasObtidas = notasComputadas.slice(1, -2);
-            let media = notasObtidas.reduce((total, nota) => total + nota, 0) / notasObtidas.length;
             console.log(`\nAtleta: ${objAtletas[i].nome}`);
             console.log(`Notas Obtidas: ${notasObtidas.join(",")}`);
             console.log(`Média Válida: ${media}`);
